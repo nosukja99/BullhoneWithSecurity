@@ -1,0 +1,34 @@
+body {
+    background: url("https://pre00.deviantart.net/fb5a/th/pre/f/2012/244/1/1/neon_blue_windows_8_wallpaper_by_gifteddeviant-d5d8v6i.png");
+    background-size: cover;
+}
+
+
+.container
+{
+    background-color: aqua;
+    opacity: .9;
+}
+
+
+img
+{
+    width: 80px;
+    height: 80px;
+    border-radius: 20px;
+}
+
+.button
+{
+    background-color: aquamarine;
+    border: none;
+    color: black;
+    size: 20px;
+}
+
+a:link {
+    color: darkblue;
+}
+a:hover {
+    color: red;
+}
