@@ -115,16 +115,34 @@ public class HomeController {
     }
 
     @RequestMapping("/update/{id}")
-    public String updateCourse(@PathVariable("id") long id, Model model)
+    public String updateCourse(@PathVariable("id") long id, Model model, HttpServletRequest request, Authentication authentication, Principal principal)
     {
-        model.addAttribute("message", messageRepository.findById(id));
-        return "messageform";
+        Boolean isAdmin = request.isUserInRole("ADMIN");
+        Boolean isUser = request.isUserInRole("USER");
+        UserDetails userDetails = (UserDetails)authentication.getPrincipal();
+        String username = principal.getName();
+        if(username.equals(messageRepository.findById(id).get().getUser().getUsername())|| username.equalsIgnoreCase("ADMIN")) {
+            model.addAttribute("message", messageRepository.findById(id));
+            return "messageform";
+        }
+        else
+        {
+            return "redirect:/";
+        }
     }
 
+
     @RequestMapping("/delete/{id}")
-    public String deleteCourse(@PathVariable("id") long id)
+    public String deleteCourse(@PathVariable("id") long id, HttpServletRequest request, Authentication authentication, Principal principal)
     {
-        messageRepository.deleteById(id);
+        Boolean isAdmin = request.isUserInRole("ADMIN");
+        Boolean isUser = request.isUserInRole("USER");
+        UserDetails userDetails = (UserDetails)authentication.getPrincipal();
+        String username = principal.getName();
+        if(username.equals(messageRepository.findById(id).get().getUser().getUsername())|| username.equalsIgnoreCase("ADMIN"))
+        {
+            messageRepository.deleteById(id);
+        }
         return "redirect:/";
     }
 

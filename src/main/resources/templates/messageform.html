@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="www.thymeleaf.org">
+<html lang="en" xmlns:th="www.thymeleaf.org" xmlns:sec="www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8"/>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
@@ -60,7 +60,16 @@
 
             <h4 class="text-info"><strong>Image Upload: </strong><input type="file" name="file" /></h4>
             <input class="button" type="submit" value="Submit" />
-        </form>
+        </form><br>
+
+    <div sec:authorize="isAuthenticated()">
+        Logged User: <span sec:authentication="name"></span><br>
+        Roles: <span sec:authentication="principal.authorities"></span><br>
+        <a href="/logout">Logout</a>
+        <div sec:authorize="hasAuthority('ADMIN')">
+            <a href="/showuserprofile" class="badge badge-warning"><h3><Strong>User List</Strong></h3></a></div>
+    </div>
+
 </div>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
