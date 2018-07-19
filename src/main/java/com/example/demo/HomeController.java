@@ -142,13 +142,6 @@ public class HomeController {
         }
     }
 
-    @RequestMapping("/updateuser/{id}")
-    public String updateProfile(@PathVariable("id") long id, Model model)
-    {
-        model.addAttribute("user", userRepository.findById(id));
-        return "registrationform";
-    }
-
     @RequestMapping("/delete/{id}")
     public String deleteMessage(@PathVariable("id") long id, HttpServletRequest request, Authentication authentication, Principal principal)
     {
