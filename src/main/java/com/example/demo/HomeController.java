@@ -47,7 +47,11 @@ public class HomeController {
         return "login";
     }
 
-
+    /**
+     * for new sign up
+     * @param model
+     * @return
+     */
     @RequestMapping(value = "/register", method = RequestMethod.GET)
     public String showRegistrationPage(Model model)
     {
@@ -55,6 +59,14 @@ public class HomeController {
         return "registration";
     }
 
+    /**
+     * for new sign up
+     * @param user
+     * @param result
+     * @param model
+     * @param file
+     * @return
+     */
     @RequestMapping(value="/register", method=RequestMethod.POST)
     public String processRegistrationPage(@Valid @ModelAttribute("user") User user, BindingResult result, Model model,
                                           @RequestParam("file") MultipartFile file)
@@ -72,6 +84,14 @@ public class HomeController {
         return "redirect:/";
     }
 
+    /**
+     * add new messge
+     * @param model
+     * @param request
+     * @param authentication
+     * @param principal
+     * @return
+     */
     @GetMapping("/add")
     public String addMessage(Model model, HttpServletRequest request, Authentication authentication, Principal principal)
     {
@@ -79,6 +99,16 @@ public class HomeController {
         return "messageform";
     }
 
+    /**
+     * add new message
+     * @param message
+     * @param result
+     * @param file
+     * @param request
+     * @param authentication
+     * @param principal
+     * @return
+     */
     @PostMapping("/add")
     public String processMessage(@Valid @ModelAttribute("message") Message message, BindingResult result,
                                  @RequestParam("file") MultipartFile file, HttpServletRequest request, Authentication authentication, Principal principal)
@@ -114,6 +144,14 @@ public class HomeController {
         return "redirect:/";
     }
 
+    /**
+     * update user profile
+     * @param model
+     * @param request
+     * @param authentication
+     * @param principal
+     * @return registration
+     */
     @RequestMapping("/viewUser")
     public String viewUser(Model model, HttpServletRequest request, Authentication authentication, Principal principal)
     {
@@ -125,6 +163,15 @@ public class HomeController {
         return "registration";
     }
 
+    /**
+     * update messge by only message owner and admin
+     * @param id
+     * @param model
+     * @param request
+     * @param authentication
+     * @param principal
+     * @return
+     */
     @RequestMapping("/update/{id}")
     public String updateMessage(@PathVariable("id") long id, Model model, HttpServletRequest request, Authentication authentication, Principal principal)
     {
@@ -142,6 +189,14 @@ public class HomeController {
         }
     }
 
+    /**
+     * delete message by only message owner and admin
+     * @param id
+     * @param request
+     * @param authentication
+     * @param principal
+     * @return
+     */
     @RequestMapping("/delete/{id}")
     public String deleteMessage(@PathVariable("id") long id, HttpServletRequest request, Authentication authentication, Principal principal)
     {
@@ -156,7 +211,11 @@ public class HomeController {
         return "redirect:/";
     }
 
-
+    /**
+     * display all of the users
+     * @param model
+     * @return go to list of users page
+     */
     @RequestMapping("/showuserprofile")
     public String showUserList(Model model)
     {
