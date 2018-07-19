@@ -114,8 +114,19 @@ public class HomeController {
         return "redirect:/";
     }
 
+    @RequestMapping("/viewUser")
+    public String viewUser(Model model, HttpServletRequest request, Authentication authentication, Principal principal)
+    {
+        Boolean isAdmin = request.isUserInRole("ADMIN");
+        Boolean isUser = request.isUserInRole("USER");
+        UserDetails userDetails = (UserDetails)authentication.getPrincipal();
+        String username = principal.getName();
+        model.addAttribute("user", userRepository.findByUsername(username));
+        return "registration";
+    }
+
     @RequestMapping("/update/{id}")
-    public String updateCourse(@PathVariable("id") long id, Model model, HttpServletRequest request, Authentication authentication, Principal principal)
+    public String updateMessage(@PathVariable("id") long id, Model model, HttpServletRequest request, Authentication authentication, Principal principal)
     {
         Boolean isAdmin = request.isUserInRole("ADMIN");
         Boolean isUser = request.isUserInRole("USER");
@@ -131,9 +142,15 @@ public class HomeController {
         }
     }
 
+    @RequestMapping("/updateuser/{id}")
+    public String updateProfile(@PathVariable("id") long id, Model model)
+    {
+        model.addAttribute("user", userRepository.findById(id));
+        return "registrationform";
+    }
 
     @RequestMapping("/delete/{id}")
-    public String deleteCourse(@PathVariable("id") long id, HttpServletRequest request, Authentication authentication, Principal principal)
+    public String deleteMessage(@PathVariable("id") long id, HttpServletRequest request, Authentication authentication, Principal principal)
     {
         Boolean isAdmin = request.isUserInRole("ADMIN");
         Boolean isUser = request.isUserInRole("USER");

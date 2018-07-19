@@ -7,7 +7,7 @@
 <body>
 <h4>New User Registration</h4>
 <form autocomplete="off" action="#" th:action="@{/register}" th:object="${user}" method="post" enctype="multipart/form-data">
-
+    <input type="hidden" th:field="*{id}" />
     Fisrt Name <mark><strong>
     <span th:if="${#fields.hasErrors('firstName')}"
           th:errors="*{firstName}">First Name Error</span></strong></mark>

@@ -78,11 +78,10 @@
         <div sec:authorize="isAuthenticated()">
             <a href="/add">Send a your message</a><br>
 
-
-
-
             Logged User: <span sec:authentication="name"></span><br>
             Roles: <span sec:authentication="principal.authorities"></span><br>
+
+            <a href="/viewUser">Update Profile</a><br>
             <a href="/logout">Logout</a>
             <div sec:authorize="hasAuthority('ADMIN')">
                 <a href="/showuserprofile" class="badge badge-warning"><h3><Strong>User List</Strong></h3></a></div>
